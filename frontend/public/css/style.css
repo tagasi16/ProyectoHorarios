@@ -1,0 +1,658 @@
+/* ══════════════════════════════════════════════
+   UNISIMON LAB — Global Styles
+   Universidad Simón Bolívar · Barranquilla
+   ══════════════════════════════════════════════ */
+
+:root {
+  /* Paleta Universidad Simón Bolívar */
+  --green-dark:    #004d24;
+  --green-main:    #006633;
+  --green-mid:     #2d7a4a;
+  --green-light:   #e8f5ee;
+  --green-xlight:  #f0faf4;
+
+  --gold:          #c8992a;
+  --gold-light:    #f5e6c0;
+  --gold-xlight:   #fdf8ee;
+
+  --red-dark:      #7a0000;
+  --red-main:      #a80000;
+
+  --navy:          #0d2340;
+  --navy-mid:      #1a3a6b;
+
+  --white:         #ffffff;
+  --off-white:     #f8f9fa;
+  --gray-100:      #f1f3f5;
+  --gray-200:      #e9ecef;
+  --gray-400:      #ced4da;
+  --gray-600:      #6c757d;
+  --gray-800:      #343a40;
+  --black:         #111827;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,77,36,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,77,36,0.14);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', system-ui, sans-serif;
+
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--gray-800);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ─────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, var(--green-mid) 100%);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.logo-area {
+  display: flex; align-items: center; gap: 14px;
+}
+
+.shield-wrapper {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.escudo { width: 44px; height: 44px; object-fit: contain; }
+
+.escudo-fallback {
+  width: 100%; height: 100%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13px; color: var(--green-dark);
+}
+
+.university-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--white); line-height: 1.2;
+}
+
+.faculty-name {
+  font-size: 0.75rem; color: rgba(255,255,255,0.75);
+  letter-spacing: 0.02em;
+}
+
+.header-nav {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.live-indicator {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; color: rgba(255,255,255,0.85);
+  font-weight: 600; letter-spacing: 0.03em;
+}
+
+.pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.6; transform: scale(1.3); }
+}
+
+.btn-admin-access {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--white); padding: 6px 16px;
+  border-radius: 20px; font-size: 0.82rem;
+  font-weight: 600; text-decoration: none;
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+}
+.btn-admin-access:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ── HERO BANNER ─────────────────────────────── */
+.hero-banner {
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--navy) 100%);
+  padding: 48px 24px;
+  position: relative; overflow: hidden;
+}
+
+.hero-bg-deco {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 50%, rgba(200,153,42,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(0,102,51,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900; color: var(--white);
+  line-height: 1.15;
+}
+
+.hero-sub {
+  margin-top: 8px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+}
+
+.current-time-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  display: flex; align-items: center; gap: 10px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.clock-icon { font-size: 1.2rem; }
+
+#clock {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.02em;
+}
+
+.date-display {
+  font-size: 0.82rem; color: rgba(255,255,255,0.65);
+  padding-left: 10px;
+  border-left: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ── MAIN CONTENT ────────────────────────────── */
+.main-content {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+/* ── FILTER BAR ──────────────────────────────── */
+.filter-bar {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--gray-600); text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.day-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.day-btn {
+  padding: 6px 16px; border-radius: 20px;
+  border: 1.5px solid var(--gray-400);
+  background: var(--white); color: var(--gray-800);
+  font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  font-family: var(--font-body);
+}
+
+.day-btn:hover {
+  border-color: var(--green-main); color: var(--green-main);
+}
+
+.day-btn.active {
+  background: var(--green-main); border-color: var(--green-main);
+  color: var(--white);
+}
+
+/* ── SCHEDULE TABLE ──────────────────────────── */
+.schedule-container {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden; border: 1px solid var(--gray-200);
+}
+
+.schedule-header-row {
+  display: grid;
+  grid-template-columns: 110px 140px 1fr 1fr 1fr 100px;
+  background: var(--green-dark);
+  padding: 14px 20px;
+  gap: 12px;
+}
+
+.schedule-header-row > div {
+  font-size: 0.75rem; font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
+
+.schedule-body { min-height: 120px; }
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 110px 140px 1fr 1fr 1fr 100px;
+  padding: 14px 20px; gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-100);
+  transition: background var(--transition);
+  animation: rowFadeIn 0.3s ease forwards;
+}
+
+.schedule-row:hover { background: var(--green-xlight); }
+.schedule-row:last-child { border-bottom: none; }
+
+@keyframes rowFadeIn {
+  from { opacity:0; transform: translateY(4px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+.cell-dia {
+  display: inline-flex; align-items: center;
+  gap: 6px; font-weight: 600; font-size: 0.88rem;
+}
+
+.dia-badge {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green-main); flex-shrink: 0;
+}
+
+.cell-hora {
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--green-dark);
+}
+
+.cell-grupo {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.grupo-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+
+.grupo-name { font-weight: 600; font-size: 0.88rem; }
+
+.cell-docente, .cell-materia {
+  font-size: 0.85rem; color: var(--gray-600);
+}
+
+.cell-aula {
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--white);
+  background: var(--green-main);
+  padding: 3px 10px; border-radius: 12px;
+  text-align: center; white-space: nowrap;
+}
+
+/* ── ESTADOS ─────────────────────────────────── */
+.loading-state, .empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px; gap: 12px;
+  color: var(--gray-600);
+}
+
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--green-main);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── LEYENDA ─────────────────────────────────── */
+.legend-section {
+  margin-top: 36px;
+}
+
+.legend-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem; color: var(--green-dark);
+  margin-bottom: 16px; font-weight: 700;
+}
+
+.groups-legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+}
+
+.legend-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid;
+}
+
+.legend-card-info strong {
+  display: block; font-size: 0.88rem; color: var(--gray-800);
+}
+
+.legend-card-info span {
+  font-size: 0.78rem; color: var(--gray-600);
+}
+
+/* * ── FOOTER ──────────────────────────────────── */ 
+.site-footer {
+  background: var(--green-dark);
+  padding: 20px 24px;
+}
+ 
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px;
+}
+ 
+.footer-brand { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
+.footer-copy  { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+
+/* ── BOTONES GLOBALES ────────────────────────── */
+.btn-primary {
+background: var(--green-main); color: var(--white);
+border: none; padding: 10px 22px;
+border-radius: var(--radius-sm); font-weight: 600;
+font-size: 0.88rem; cursor: pointer;
+transition: var(--transition);
+font-family: var(--font-body);
+}
+.btn-primary:hover { background: var(--green-dark); }
+
+.btn-secondary {
+background: var(--gray-100); color: var(--gray-800);
+border: 1px solid var(--gray-400); padding: 10px 22px;
+border-radius: var(--radius-sm); font-weight: 600;
+font-size: 0.88rem; cursor: pointer;
+transition: var(--transition);
+font-family: var(--font-body);
+}
+
+.btn-secondary:hover { background: var(--gray-200); }
+
+
+
+/* ── MODALES ──────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  width: 100%; max-width: 500px; margin: 16px;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity:0; }
+  to { transform: translateY(0); opacity:1; }
+}
+
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; color: var(--green-dark);
+}
+
+.modal-close {
+  background: none; border: none; font-size: 1.1rem;
+  cursor: pointer; color: var(--gray-600);
+  transition: var(--transition); padding: 4px;
+  border-radius: 4px;
+}
+.modal-close:hover { background: var(--gray-100); }
+
+.modal-form { padding: 20px 24px 24px; }
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block; font-size: 0.82rem;
+  font-weight: 600; color: var(--gray-800);
+  margin-bottom: 6px; text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--gray-400);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--gray-800); background: var(--white);
+  transition: border-color var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 3px rgba(0,102,51,0.1);
+}
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+
+.form-actions {
+  display: flex; justify-content: flex-end;
+  gap: 10px; margin-top: 20px;
+  padding-top: 16px; border-top: 1px solid var(--gray-200);
+}
+
+/* ── TOAST ───────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  padding: 12px 20px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 0.88rem; z-index: 9999;
+  box-shadow: var(--shadow-lg); animation: slideUp 0.2s ease;
+  max-width: 320px;
+}
+
+.toast.success { background: var(--green-main); color: var(--white); }
+.toast.error   { background: var(--red-main); color: var(--white); }
+.toast.warning { background: var(--gold); color: var(--green-dark); }
+
+/* ── COLOR PICKER ────────────────────────────── */
+.color-picker-row {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.color-picker-row input[type="color"] {
+  width: 40px; height: 40px; padding: 2px;
+  border-radius: 6px; cursor: pointer;
+}
+
+.color-presets { display: flex; gap: 6px; }
+
+.color-preset {
+  width: 24px; height: 24px; border-radius: 50%;
+  cursor: pointer; transition: transform 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.color-preset:hover { transform: scale(1.2); }
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 768px) {
+  .schedule-header-row,
+  .schedule-row {
+    grid-template-columns: 80px 110px 1fr;
+  }
+  .col-docente, .col-aula,
+  .cell-docente, .cell-aula { display: none; }
+
+  .hero-content { flex-direction: column; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   BANNER DE LABORATORIO + ROTACIÓN AUTOMÁTICA
+   ══════════════════════════════════════════════ */
+
+/* Banner que muestra el lab activo debajo del header */
+.lab-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d1f38 100%);
+  border-bottom: 2px solid rgba(200,153,42,0.3);
+  padding: 0 24px;
+}
+
+.lab-banner-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  height: 68px; gap: 20px;
+}
+
+.lab-info {
+  display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0;
+}
+
+.lab-icono { font-size: 1.6rem; flex-shrink: 0; }
+
+.lab-nombre {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 900;
+  color: var(--white); line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.lab-meta {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+  margin-top: 2px; display: flex; gap: 14px; flex-wrap: wrap;
+}
+
+/* Controles de rotación (dots + barra) */
+.lab-controles {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 6px; flex-shrink: 0;
+}
+
+/* Bolitas indicadoras de laboratorio */
+.lab-dots { display: flex; gap: 5px; align-items: center; }
+
+.lab-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.35s ease; cursor: default;
+}
+
+.lab-dot.activo {
+  background: var(--gold);
+  width: 20px; border-radius: 4px;
+}
+
+/* Barra de progreso de rotación */
+.lab-progreso-wrap {
+  width: 100px; height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px; overflow: hidden;
+}
+
+.lab-progreso {
+  height: 100%; background: var(--gold);
+  border-radius: 2px; width: 0%;
+  transition: width 1s linear;
+}
+
+/* ── Animaciones de transición entre labs ──── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-12px); }
+}
+
+.schedule-body.saliendo { animation: fadeSlideOut 0.3s ease forwards; }
+.schedule-body.entrando { animation: fadeSlideIn  0.35s ease forwards; }
+
+/* ── Fila EN CURSO (clase pasando ahora) ───── */
+.schedule-row.en-curso {
+  background: linear-gradient(90deg, rgba(200,153,42,0.12) 0%, transparent 100%);
+  border-left: 3px solid var(--gold);
+}
+
+.schedule-row.en-curso .cell-hora { color: var(--gold) !important; }
+
+/* ── Fila del día actual (no en curso) ─────── */
+.schedule-row.hoy { background: var(--green-xlight); }
+
+/* ── Fila de días pasados ───────────────────── */
+.schedule-row.pasado { opacity: 0.4; }
+
+/* ── Badges de estado ───────────────────────── */
+.estado-badge {
+  font-size: 0.72rem; font-weight: 700;
+  padding: 3px 9px; border-radius: 10px;
+  white-space: nowrap; display: inline-block;
+}
+
+.estado-encurso  { background: rgba(200,153,42,0.15); color: #92650a; border: 1px solid rgba(200,153,42,0.3); }
+.estado-proximo  { background: var(--green-light); color: var(--green-dark); border: 1px solid rgba(0,102,51,0.2); }
+.estado-pasado   { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+.estado-prog     { background: #e8f0fb; color: var(--navy-mid); border: 1px solid rgba(26,58,107,0.2); }
+
+/* ── Separador de día dentro de la tabla ───── */
+.dia-separador {
+  padding: 5px 20px;
+  font-size: 0.7rem; font-weight: 700;
+  color: var(--gray-600); text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* ── Columna estado reemplaza columna aula ─── */
+.col-estado { text-align: center; }
+.schedule-header-row { grid-template-columns: 110px 140px 1fr 1fr 1fr 100px; }
+.schedule-row        { grid-template-columns: 110px 140px 1fr 1fr 1fr 100px; }

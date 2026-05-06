@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrador — UniSimón Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body class="admin-body">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">
+      <img src="/images/escudo.png" alt="Escudo" class="sidebar-escudo" onerror="this.style.display='none'">
+      <div class="sidebar-brand">
+        <span class="sidebar-title">UniSimón</span>
+        <span class="sidebar-sub">Panel Admin</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-panel="horarios">
+        <span class="nav-icon">📅</span> Horarios
+      </a>
+      <a href="#" class="nav-item" data-panel="laboratorios">
+        <span class="nav-icon">🔬</span> Laboratorios
+      </a>
+      <a href="#" class="nav-item" data-panel="grupos">
+        <span class="nav-icon">👥</span> Grupos
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="admin-user-info">
+        <span class="nav-icon">👤</span>
+        <span id="admin-name">Administrador</span>
+      </div>
+      <button id="logout-btn" class="logout-btn">
+        <span>⏻</span> Cerrar sesión
+      </button>
+      <a href="/" class="view-public-btn">👁 Ver pantalla TV</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+
+    <!-- ── PANEL HORARIOS ── -->
+    <section id="panel-horarios" class="admin-panel active-panel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Gestión de Horarios</h2>
+          <p class="panel-subtitle">Asigna grupos a laboratorios en franjas horarias específicas</p>
+        </div>
+        <button class="btn-primary" id="btn-add-horario">+ Nueva Asignación</button>
+      </div>
+      <!-- Filtro por laboratorio -->
+      <div class="filter-lab-bar">
+        <span class="filter-lab-label">Ver horarios de:</span>
+        <div id="lab-filter-btns" class="lab-filter-btns">
+          <button class="lab-filter-btn active" data-lab="todos">Todos</button>
+        </div>
+      </div>
+      <div class="admin-table-wrapper">
+        <div class="table-head-row">
+          <div>Laboratorio</div>
+          <div>Grupo</div>
+          <div>Día</div>
+          <div>Inicio</div>
+          <div>Fin</div>
+          <div>Acciones</div>
+        </div>
+        <div id="horarios-table-body"></div>
+      </div>
+    </section>
+
+    <!-- ── PANEL LABORATORIOS ── -->
+    <section id="panel-laboratorios" class="admin-panel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Gestión de Laboratorios</h2>
+          <p class="panel-subtitle">Administra los laboratorios del centro</p>
+        </div>
+        <button class="btn-primary" id="btn-add-lab">+ Nuevo Laboratorio</button>
+      </div>
+      <div class="groups-grid" id="labs-grid"></div>
+    </section>
+
+    <!-- ── PANEL GRUPOS ── -->
+    <section id="panel-grupos" class="admin-panel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Gestión de Grupos</h2>
+          <p class="panel-subtitle">Administra los grupos académicos</p>
+        </div>
+        <button class="btn-primary" id="btn-add-grupo">+ Nuevo Grupo</button>
+      </div>
+      <div class="groups-grid" id="groups-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- ── MODAL HORARIO ── -->
+  <div id="modal-horario" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-horario-title">Nueva Asignación</h3>
+        <button class="modal-close" onclick="closeModal('modal-horario')">✕</button>
+      </div>
+      <form id="form-horario" class="modal-form">
+        <input type="hidden" id="horario-id">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Laboratorio *</label>
+            <select id="horario-lab" required>
+              <option value="">— Seleccionar laboratorio —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Grupo *</label>
+            <select id="horario-grupo" required>
+              <option value="">— Seleccionar grupo —</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div id="wrapper-dia" class="form-group">
+              <label>Día de la Semana *</label>
+              <select id="horario-dia" required>
+                  <option value="">— Seleccionar día —</option>
+                  <option value="1">Lunes</option>
+                  <option value="2">Martes</option>
+                  <option value="3">Miércoles</option>
+                  <option value="4">Jueves</option>
+                  <option value="5">Viernes</option>
+                  <option value="6">Sábado</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label>Hora inicio *</label>
+            <input type="time" id="horario-inicio" required>
+          </div>
+          <div class="form-group">
+            <label>Hora fin *</label>
+            <input type="time" id="horario-fin" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-horario')">Cancelar</button>
+          <button type="submit" class="btn-primary" id="btn-guardar-horario">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MODAL LABORATORIO ── -->
+  <div id="modal-lab" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-lab-title">Nuevo Laboratorio</h3>
+        <button class="modal-close" onclick="closeModal('modal-lab')">✕</button>
+      </div>
+      <form id="form-lab" class="modal-form">
+        <input type="hidden" id="lab-id">
+        <div class="form-group">
+          <label>Nombre *</label>
+          <input type="text" id="lab-nombre" required placeholder="Ej: Lab Cómputo 1">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ubicación</label>
+            <input type="text" id="lab-ubicacion" placeholder="Ej: Bloque A — Piso 1">
+          </div>
+          <div class="form-group">
+            <label>Capacidad (puestos)</label>
+            <input type="number" id="lab-capacidad" min="1" max="200" placeholder="30">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea id="lab-descripcion" rows="2" placeholder="Descripción breve del laboratorio"
+            style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-400);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:.9rem;resize:vertical"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-lab')">Cancelar</button>
+          <button type="submit" class="btn-primary" id="btn-guardar-lab">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MODAL GRUPO ── -->
+  <div id="modal-grupo" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-grupo-title">Nuevo Grupo</h3>
+        <button class="modal-close" onclick="closeModal('modal-grupo')">✕</button>
+      </div>
+      <form id="form-grupo" class="modal-form">
+        <input type="hidden" id="grupo-id">
+        <div class="form-group">
+          <label>Nombre del grupo *</label>
+          <input type="text" id="grupo-nombre" required placeholder="Ej: Grupo A — 5A">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Docente</label>
+            <input type="text" id="grupo-docente" placeholder="Nombre del docente">
+          </div>
+          <div class="form-group">
+            <label>Materia</label>
+            <input type="text" id="grupo-materia" placeholder="Nombre de la materia">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Color identificador</label>
+          <div class="color-picker-row">
+            <input type="color" id="grupo-color" value="#006633">
+            <div class="color-presets">
+              <span class="color-preset" style="background:#006633" data-color="#006633"></span>
+              <span class="color-preset" style="background:#8B0000" data-color="#8B0000"></span>
+              <span class="color-preset" style="background:#1a3a6b" data-color="#1a3a6b"></span>
+              <span class="color-preset" style="background:#c8992a" data-color="#c8992a"></span>
+              <span class="color-preset" style="background:#2d6e3e" data-color="#2d6e3e"></span>
+              <span class="color-preset" style="background:#7b3f9e" data-color="#7b3f9e"></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-grupo')">Cancelar</button>
+          <button type="submit" class="btn-primary" id="btn-guardar-grupo">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  
+  <!-- ── MODAL CONFIRMAR ELIMINAR ── -->
+  <div id="modal-confirm" class="modal-overlay" style="display:none">
+    <div class="modal-box modal-box-sm">
+      <div class="modal-header">
+        <h3 id="confirm-title">Confirmar eliminación</h3>
+        <button class="modal-close" onclick="closeModal('modal-confirm')">✕</button>
+      </div>
+      <div style="padding:20px 24px">
+        <p id="confirm-msg" style="font-size:.9rem;color:var(--gray-600);margin-bottom:20px;line-height:1.5"></p>
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="closeModal('modal-confirm')">Cancelar</button>
+          <button class="btn-danger" id="confirm-ok-btn">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" style="display:none"></div>
+  <script src="/js/admin.js"></script>
+</body>
+
+</html>

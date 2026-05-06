@@ -1,0 +1,292 @@
+/* ══════════════════════════════════════════════
+   ADMIN PANEL — CSS completo
+   Universidad Simón Bolívar
+   ══════════════════════════════════════════════ */
+
+/* ── LAYOUT GENERAL ──────────────────────────── */
+.admin-body {
+  display: flex; min-height: 100vh;
+  background: var(--gray-100);
+}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+.admin-sidebar {
+  width: 240px; flex-shrink: 0;
+  background: var(--green-dark);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-escudo {
+  width: 36px; height: 36px; object-fit: contain;
+  border-radius: 50%; background: var(--white);
+}
+
+.sidebar-brand { line-height: 1.2; }
+.sidebar-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; color: var(--white);
+}
+.sidebar-sub {
+  font-size: 0.7rem; color: rgba(255,255,255,0.55);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+.sidebar-nav {
+  flex: 1; padding: 16px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.7);
+  text-decoration: none; font-size: 0.9rem; font-weight: 600;
+  transition: var(--transition);
+}
+.nav-item:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+.nav-item.active { background: var(--gold); color: var(--green-dark); }
+.nav-icon { font-size: 1rem; }
+
+.sidebar-footer {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.admin-user-info {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.75); font-size: 0.85rem; padding: 0 4px;
+}
+
+.logout-btn {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 9px 14px;
+  background: rgba(200,0,0,0.2); border: 1px solid rgba(255,80,80,0.2);
+  color: #fca5a5; border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 0.85rem; font-weight: 600;
+  font-family: var(--font-body); transition: var(--transition);
+}
+.logout-btn:hover { background: rgba(200,0,0,0.35); }
+
+.view-public-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.6); font-size: 0.8rem;
+  text-decoration: none; transition: var(--transition);
+}
+.view-public-btn:hover { color: var(--white); background: rgba(255,255,255,0.12); }
+
+/* ── ÁREA PRINCIPAL ──────────────────────────── */
+.admin-main {
+  flex: 1; padding: 32px;
+  min-height: 100vh; overflow-y: auto;
+}
+
+.admin-panel { display: none; }
+.admin-panel.active-panel { display: block; }
+
+.panel-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--green-dark); font-weight: 700;
+}
+.panel-subtitle {
+  font-size: 0.88rem; color: var(--gray-600); margin-top: 4px;
+}
+
+/* ── FILTRO DE LABORATORIO ───────────────────── */
+.filter-lab-bar {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.filter-lab-label {
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--gray-600); text-transform: uppercase;
+  letter-spacing: 0.05em; white-space: nowrap;
+}
+.lab-filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.lab-filter-btn {
+  padding: 5px 14px; border-radius: 20px;
+  border: 1.5px solid var(--gray-400);
+  background: var(--white); color: var(--gray-800);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  font-family: var(--font-body);
+}
+.lab-filter-btn:hover { border-color: var(--green-main); color: var(--green-main); }
+.lab-filter-btn.active {
+  background: var(--green-main); border-color: var(--green-main); color: var(--white);
+}
+
+/* ── TABLA DE HORARIOS ───────────────────────── */
+.admin-table-wrapper {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+
+.table-head-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 110px 70px 70px 190px;
+  padding: 12px 20px; gap: 12px;
+  background: var(--green-dark);
+}
+
+.table-head-row > div {
+  font-size: 0.72rem; font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
+
+.admin-table-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 110px 70px 70px 190px;
+  padding: 12px 20px; gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-100);
+  transition: background var(--transition);
+  animation: rowFadeIn 0.2s ease;
+}
+.admin-table-row:hover { background: var(--green-xlight); }
+.admin-table-row:last-child { border-bottom: none; }
+
+.grupo-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-weight: 600; font-size: 0.88rem;
+}
+.grupo-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.cell-text { font-size: 0.85rem; color: var(--gray-800); }
+
+/* ── BOTONES DE ACCIÓN ───────────────────────── */
+.action-btns { display: flex; gap: 6px; align-items: center; }
+
+.btn-accion {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; border: none;
+  font-family: var(--font-body);
+  transition: var(--transition); white-space: nowrap;
+}
+
+.btn-editar {
+  background: var(--green-light); color: var(--green-dark);
+  border: 1.5px solid var(--green-mid);
+}
+.btn-editar:hover {
+  background: var(--green-main); color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-eliminar {
+  background: #fff1f2; color: #b91c1c;
+  border: 1.5px solid #fecdd3;
+}
+.btn-eliminar:hover {
+  background: #dc2626; color: var(--white);
+  transform: translateY(-1px);
+}
+
+.btn-full { width: 100%; justify-content: center; }
+
+.btn-danger {
+  background: #dc2626; color: var(--white);
+  border: none; padding: 10px 22px;
+  border-radius: var(--radius-sm); font-weight: 600;
+  font-size: 0.88rem; cursor: pointer;
+  transition: var(--transition); font-family: var(--font-body);
+}
+.btn-danger:hover { background: #b91c1c; }
+
+/* ── TARJETAS DE GRUPOS / LABORATORIOS ───────── */
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+.group-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  animation: rowFadeIn 0.2s ease;
+  transition: box-shadow var(--transition);
+}
+.group-card:hover { box-shadow: var(--shadow-md); }
+
+.group-card-header {
+  padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.group-name-row { display: flex; align-items: center; gap: 8px; }
+
+.group-color-bar {
+  width: 12px; height: 12px; border-radius: 50%;
+}
+
+.group-card-name { font-weight: 700; font-size: 0.95rem; color: var(--gray-800); }
+
+.group-card-body { padding: 12px 18px; }
+
+.group-meta-item {
+  display: flex; gap: 6px;
+  font-size: 0.82rem; color: var(--gray-600); margin-bottom: 4px;
+}
+.group-meta-item strong { color: var(--gray-800); }
+
+.group-card-actions {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--gray-100);
+}
+
+/* ── MODAL PEQUEÑO CONFIRMACIÓN ──────────────── */
+.modal-box-sm { max-width: 420px; }
+
+/* ── ESTADO VACÍO ────────────────────────────── */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px; gap: 12px;
+  color: var(--gray-600); text-align: center; font-size: 0.9rem;
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 900px) {
+  .admin-sidebar { width: 64px; }
+  .sidebar-brand, .sidebar-sub,
+  .nav-item span:not(.nav-icon),
+  .admin-user-info span:not(.nav-icon),
+  .logout-btn span:last-child,
+  .view-public-btn span:last-child { display: none; }
+  .admin-main { padding: 16px; }
+  .table-head-row,
+  .admin-table-row {
+    grid-template-columns: 1fr 90px 70px 70px 160px;
+  }
+  .table-head-row > div:nth-child(2),
+  .admin-table-row > div:nth-child(2) { display: none; }
+}

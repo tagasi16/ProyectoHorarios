@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: unisimon_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: unisimon_root_2024
+      MYSQL_DATABASE: unisimon_lab
+      MYSQL_USER: unisimon_user
+      MYSQL_PASSWORD: unisimon_pass_2024
+      # Forzar UTF-8 para que los acentos y ñ se guarden correctamente
+      MYSQL_INITDB_CHARSET: utf8mb4
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --init-connect='SET NAMES utf8mb4'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/01_init.sql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-punisimon_root_2024"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: unisimon_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: unisimon_user
+      DB_PASSWORD: unisimon_pass_2024
+      DB_NAME: unisimon_lab
+      SESSION_SECRET: unisimon_super_secret_key_docker_2024
+      PORT: 3000
+      FRONTEND_DIR: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

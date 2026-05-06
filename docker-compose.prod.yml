@@ -1,0 +1,53 @@
+version: '3.8'
+
+# ══════════════════════════════════════════════════════
+# PRODUCCIÓN — Railway / VPS / DigitalOcean
+# Uso: docker compose -f docker-compose.prod.yml up -d
+# ══════════════════════════════════════════════════════
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: unisimon_db_prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data_prod:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/01_init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${DB_USER}", "-p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: unisimon_app_prod
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      SESSION_SECRET: ${SESSION_SECRET}
+      PORT: 3000
+      FRONTEND_DIR: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data_prod:

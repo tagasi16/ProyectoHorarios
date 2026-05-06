@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laboratorios — Universidad Simón Bolívar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="shield-wrapper">
+          <img src="/images/escudo.png" alt="Escudo UniSimón" class="escudo"
+               onerror="this.style.display='none'; document.getElementById('escudo-fallback').style.display='flex'">
+          <div id="escudo-fallback" class="escudo-fallback" style="display:none"><span>USB</span></div>
+        </div>
+        <div class="header-titles">
+          <h1 class="university-name">Universidad Simón Bolívar</h1>
+          <p class="faculty-name">Centro de Laboratorios — Sede Barranquilla</p>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <span class="live-indicator"><span class="pulse-dot"></span>En vivo</span>
+        <div class="current-time-box">
+          <span id="clock">00:00:00</span>
+          <span class="date-display" id="date-display"></span>
+        </div>
+        <a href="/login" class="btn-admin-access">Administrador</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BANNER DEL LABORATORIO ACTIVO -->
+  <div class="lab-banner">
+    <div class="lab-banner-inner">
+      <div class="lab-info">
+        <!-- <span class="lab-icono">🔬</span> -->
+        <div>
+          <h2 class="lab-nombre" id="lab-nombre">Cargando...</h2>
+          <div class="lab-meta" id="lab-meta"></div>
+        </div>
+      </div>
+      <div class="lab-controles">
+        <div class="lab-dots" id="lab-dots"></div>
+        <div class="lab-progreso-wrap">
+          <div class="lab-progreso" id="lab-progreso"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA DE HORARIOS -->
+  <main class="main-content">
+    <div class="schedule-container">
+      <div class="schedule-header-row">
+        <div class="col-dia">Día</div>
+        <div class="col-hora">Horario</div>
+        <div class="col-grupo">Grupo</div>
+        <div class="col-docente">Docente</div>
+        <div class="col-materia">Materia</div>
+        <div class="col-estado">Estado</div>
+      </div>
+      <div id="schedule-body" class="schedule-body">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Cargando horarios...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>Universidad Simón Bolívar</strong> — Barranquilla, Colombia
+      </div>
+      <div class="footer-copy">
+        Sistema de Gestión de Laboratorios &copy; 2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
